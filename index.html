@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280,height=720">
+<title>わんも〜Cafe</title>
+
+<style>
+
+@font-face{
+  font-family:'PandaBakery';
+  src:url('pandabakery.ttf');
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  width:1280px;
+  height:720px;
+  overflow:hidden;
+  position:relative;
+
+  background:
+  linear-gradient(
+    180deg,
+    #fff7f3 0%,
+    #fff2f6 100%
+  );
+
+  font-family:'PandaBakery',sans-serif;
+}
+
+/* =========================
+メニュー画面
+========================= */
+
+.menuScreen{
+  position:absolute;
+  inset:0;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.menuScreen::before{
+  content:"";
+
+  position:absolute;
+  inset:0;
+
+  background:
+
+  radial-gradient(
+    circle at 10% 20%,
+    rgba(255,192,203,0.25),
+    transparent 18%
+  ),
+
+  radial-gradient(
+    circle at 85% 25%,
+    rgba(255,220,230,0.30),
+    transparent 16%
+  ),
+
+  radial-gradient(
+    circle at 50% 90%,
+    rgba(255,210,220,0.25),
+    transparent 18%
+  );
+}
+
+.menuWrap{
+  position:relative;
+  z-index:5;
+
+  animation:
+  floatMenu 4s ease-in-out infinite;
+}
+
+.menuImage{
+  display:block;
+
+  width:1120px;
+
+  border-radius:42px;
+
+  border:6px solid white;
+
+  box-shadow:
+  0 18px 40px rgba(255,170,190,0.22);
+
+  object-fit:cover;
+
+  transition:
+  opacity .5s ease;
+}
+
+/* キラキラ */
+
+.menuSparkle{
+  position:absolute;
+
+  width:14px;
+  height:14px;
+
+  background:white;
+
+  border-radius:50%;
+
+  opacity:0.4;
+
+  animation:
+  sparkle 4s infinite;
+}
+
+.menuSparkle.s1{
+  top:120px;
+  left:240px;
+}
+
+.menuSparkle.s2{
+  top:300px;
+  right:220px;
+  animation-delay:1s;
+}
+
+.menuSparkle.s3{
+  bottom:140px;
+  left:480px;
+  animation-delay:2s;
+}
+
+.menuSparkle.s4{
+  bottom:220px;
+  right:380px;
+  animation-delay:3s;
+}
+
+@keyframes floatMenu{
+
+  0%{
+    transform:translateY(0px);
+  }
+
+  50%{
+    transform:translateY(-6px);
+  }
+
+  100%{
+    transform:translateY(0px);
+  }
+
+}
+
+@keyframes sparkle{
+
+  0%{
+    transform:scale(0);
+    opacity:0;
+  }
+
+  50%{
+    transform:scale(1);
+    opacity:0.45;
+  }
+
+  100%{
+    transform:scale(0);
+    opacity:0;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="menuScreen">
+
+  <div class="menuWrap">
+
+    <img
+    src="wanmow_menu1.png"
+    class="menuImage"
+    id="menuImage">
+
+  </div>
+
+  <div class="menuSparkle s1"></div>
+  <div class="menuSparkle s2"></div>
+  <div class="menuSparkle s3"></div>
+  <div class="menuSparkle s4"></div>
+
+</div>
+
+<script>
+
+const menuImage =
+document.getElementById(
+"menuImage"
+);
+
+let state = 0;
+
+function nextSlide(){
+
+  menuImage.style.opacity = "0";
+
+  setTimeout(()=>{
+
+    if(state === 0){
+
+      menuImage.src =
+      "wanmow_menu2.png";
+
+      state = 1;
+
+      menuImage.style.opacity = "1";
+
+      setTimeout(
+      nextSlide,
+      10000
+      );
+
+    }else if(state === 1){
+
+      menuImage.src =
+      "wanmow_menu3.png";
+
+      state = 2;
+
+      menuImage.style.opacity = "1";
+
+      setTimeout(
+      nextSlide,
+      10000
+      );
+
+    }else{
+
+      menuImage.src =
+      "wanmow_menu1.png";
+
+      state = 0;
+
+      menuImage.style.opacity = "1";
+
+      setTimeout(
+      nextSlide,
+      20000
+      );
+
+    }
+
+  },500);
+
+}
+
+setTimeout(
+nextSlide,
+20000
+);
+
+</script>
+
+</body>
+</html>
